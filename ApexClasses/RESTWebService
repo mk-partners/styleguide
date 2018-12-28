@@ -1,0 +1,89 @@
+@RestResource(urlMapping='/RESTWebService/*')
+global with sharing class RESTWebService {
+  /**
+   * @Instructions
+   * @Step1 - Name the Class Appropriately
+   * @Step2 - Replace the urlMapping with a context specific Name
+   * @Step3 - Comment out any HTTP verbs not being used
+   * @Step4 - 
+   * @Stepx - Test with Postman
+   */
+
+
+  @HttpGet
+  global static void doGet() {
+    RestRequest req = RestContext.request;
+    RestResponse res = RestContext.response;
+    handleRequest( mapRequest( req ), res )
+  }
+ 
+  @HttpPost
+  global static void doPost() {
+    RestRequest req = RestContext.request;
+    RestResponse res = RestContext.response;
+    handleRequest( mapRequest( req ), res )
+  }
+
+  @HttpPut
+  global static void doPut() {
+    RestRequest req = RestContext.request;
+    RestResponse res = RestContext.response;
+    handleRequest( mapRequest( req ), res )
+  }
+
+  @HttpDelete
+  global static void doDelete() {
+    RestRequest req = RestContext.request;
+    RestResponse res = RestContext.response;
+    handleRequest( mapRequest( req ), res )
+  }
+
+  /**
+   * @name mapRequest
+   * @description Moves all aspects of a request into a single Map
+   */
+  public Map<String,String> mapRequest(RestRequest req){
+    Map<String,String> res = new Map<String, String>();
+    if ( req.httpMethod != null ){
+      res.put( 'httpMethod', req.httpMethod );
+    }
+    if ( req.requestURI != null ){
+      res.put('requestURI', req.requestURI );
+    }
+    if ( req.headers != null ){
+      res.putAll( req.headers );
+    }
+    if ( req.params != null ){
+      res.putAll( req.params );
+    }
+    if ( req.requestBody != null ){
+      res.put('requestBody', req.requestBody );
+    }
+    return res;
+  }
+
+  public static void handleRequest(Map<String,String> input, RestResponse res) {
+    res.addHeader( 'Content-Type', 'application/json' );
+    res.statusCode = 500;
+    String responseString = '';
+    try {
+      if ( input.get('httpMethod') == 'DELETE' ){
+        //Call custom logic, setting return to responseString
+      }
+      else if ( input.get('httpMethod') == 'PUT' ){
+        //Call custom logic, setting return to responseString
+      }
+      else if ( input.get('httpMethod') == 'POST' ){
+        //Call custom logic, setting return to responseString
+      }
+      else if ( input.get('httpMethod') == 'GET' ){
+        //Call custom logic, setting return to responseString
+      }
+      res.statusCode = 200;
+    } catch ( Exception e ){
+      res.statusCode = 400;
+    }
+    res.responseBody = blob.valueOf(JSON.serializePretty(responseString));
+  }
+
+}

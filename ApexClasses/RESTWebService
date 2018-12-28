@@ -14,28 +14,28 @@ global with sharing class RESTWebService {
   global static void doGet() {
     RestRequest req = RestContext.request;
     RestResponse res = RestContext.response;
-    handleRequest( mapRequest( req ), res )
+    handleRequest( mapRequest( req ), res );
   }
  
   @HttpPost
   global static void doPost() {
     RestRequest req = RestContext.request;
     RestResponse res = RestContext.response;
-    handleRequest( mapRequest( req ), res )
+    handleRequest( mapRequest( req ), res );
   }
 
   @HttpPut
   global static void doPut() {
     RestRequest req = RestContext.request;
     RestResponse res = RestContext.response;
-    handleRequest( mapRequest( req ), res )
+    handleRequest( mapRequest( req ), res );
   }
 
   @HttpDelete
   global static void doDelete() {
     RestRequest req = RestContext.request;
     RestResponse res = RestContext.response;
-    handleRequest( mapRequest( req ), res )
+    handleRequest( mapRequest( req ), res );
   }
 
   /**

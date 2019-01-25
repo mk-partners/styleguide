@@ -1,0 +1,43 @@
+/**
+  * @Instructions
+  *@Step1 - Create Helper (?)
+  *@Step2 - Name the Trigger Appropriately
+  *@Step3 - Replace {{ api }} with Trigger Name and {{ sObject }} with Target sObject
+  *@Step4 - Comment out unused branches
+  *@Stepx - Run Trigger_Helper in Debug Console
+  */
+
+trigger {{ api }} on {{ sObject }} (
+    before insert,
+    before update,
+    before delete,
+    after insert,
+    after update,
+    after delete
+) {
+
+    if(trigger.isBefore && trigger.isInsert) {
+        Trigger_Helper.beforeInsert(trigger.new);
+    }
+
+    if(trigger.isBefore && trigger.isUpdate) {
+        Trigger_Helper.beforeUpdate(trigger.old, trigger.new);
+    }
+
+    if(trigger.isBefore && trigger.isDelete) {
+        Trigger_Helper.beforeDelete(trigger.old);
+    }
+
+    if(trigger.isAfter && trigger.isInsert) {
+        Trigger_Helper.afterInsert(trigger.new);
+    }
+
+    if(trigger.isAfter && trigger.isUpdate) {
+        Trigger_Helper.afterUpdate(trigger.old, trigger.new);
+    }
+
+    if(trigger.isAfter && trigger.isDelete) {
+        Trigger_Helper.afterDelete(trigger.old);
+    }
+
+}

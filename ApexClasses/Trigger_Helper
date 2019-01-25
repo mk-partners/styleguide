@@ -1,0 +1,58 @@
+public without sharing Trigger_Helper {
+/**
+  * @Instructions
+  *@Step1 - Name Helper Appropriately
+  *@Step2 - Replace {{ api }} with Trigger Name and {{ sObject }} with Target sObject
+  *@Step4 - Comment out unused methods
+  *@Stepx - Run Trigger_Helper in Debug Console
+  */
+
+    public static void beforeInsert(List<{{ sObject }}> newList) {
+        for(Integer i = 0; i < newList.size(); i++) {
+            System.debug(newList[i]);
+        }
+    }
+
+    public static void beforeUpdate(List<{{ sObject }}> oldList, List<{{ sObject }}> newList) {
+        for(Integer i = 0; i < newList.size(); i++) {
+            System.debug(newList[i]);
+        }
+    }
+
+    public static void beforeDelete(List<{{ sObject }}> oldList) {
+        for(Integer i = 0; i < oldList.size(); i++) {
+            System.debug(oldList[i]);
+        }
+    }
+    
+    public static void afterInsert(List<{{ sObject }}> newList) {
+        Set<Id> objectIds = new Set<Id>();
+        for(Integer i = 0; i < newList.size(); i++) {
+            objectIds.add(newList[i].Id);
+        }
+        helperMethod(objectIds);
+    }
+
+    public static void afterUpdate(List<{{ sObject }}> oldList, List<{{ sObject }}> newList) {
+        Set<Id> objectIds = new Set<Id>();
+        for(Integer i = 0; i < newList.size(); i++) {
+            objectIds.add(newList[i].Id);
+        }
+        helperMethod(objectIds);
+    }
+
+
+    public static void afterDelete(List<{{ sObject }}> oldList) {
+        for(Integer i = 0; i < oldList.size(); i++) {
+            System.debug(oldList[i]);
+        }
+    }
+
+
+
+    static void helperMethod(Set<Id> objectIds) {
+        for(Integer i = 0; i < objectIds.size(); i++) {
+            System.debug(objectIds[i]);
+        }
+    }
+}
